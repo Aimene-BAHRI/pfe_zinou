@@ -114,9 +114,8 @@ p {
 }
 
 strong {
-  font-weight: 400;
+  font-weight: bold;
 }
-
 .img-radius {
   border-radius: 50%;
 }

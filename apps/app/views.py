@@ -24,7 +24,11 @@ def promethee(request):
     if request.method == 'POST':
         print('HIIIIIIIIIIIII')
         file = request.FILES['docfile'] or None
-         # Inputs of the equationf or the first decision maker (ECONOMISTE).
+        choix = request.POST.get("choice") or None
+
+        print('salam ',choix)
+
+        # Inputs of the equationf or the first decision maker (ECONOMISTE).
         ECONOMISTE = [0.178, 0.294, 0.0616, 0.0616, 0.0616, 0.1738, 0.1738]
         POLITICIEN = [0.0751, 0.1363, 0.1363, 0.0616, 0.172, 0.172, 0.172]
         Rep_de_lenv = [0.0496, 0.0708, 0.1731, 0.1893, 0.1893, 0.1752, 0.1527]
@@ -58,10 +62,11 @@ def apriori(request):
         print(data.shape)
 
         records = []
-        for i in range(0, 651):
-            records.append([str(data.values[i, j]) for j in range(0, 7)])
-        print('test')
-        association = list(apriori(records, min_support = 0.5, min_confidence = 0.7, min_lift = 1.2, min_length = 7))
+        for i in range(1, 651):
+            records.append([data.values[i, j] for j in range(0, 6)])
+        print(records)
+        association = apriori(data.values)
+
 
     html_template = loader.get_template('apriori.html')
     return HttpResponse(html_template.render(context, request))

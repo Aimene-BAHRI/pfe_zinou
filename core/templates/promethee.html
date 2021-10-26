@@ -35,18 +35,42 @@
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Basic Componant</h5>
+                                        <h5>Promethee II</h5>
                                     </div>
                                     <div class="card-body">
-                                        <h5>1 : Load your data</h5>
-                                        <hr>
+                                        
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <form method="POST" enctype="multipart/form-data">
                                                     {% csrf_token %}
                                                     <div class="form-group">
+                                                        <h5>1 : performance matrix</h5>
                                                         {% comment %} <label for="exampleInputFile">Pick your data file</label> {% endcomment %}
                                                         <input name="docfile" type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp" />                                                    </div>        
+                                                        <hr>
+                                                        <h5>2 : decision maker weights</h5>
+                                                        
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" id="customRadioInline1" name="choice" class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadioInline1">Economiste</label>
+                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
+                                                        </div>
+                                                        <div class="custom-control custom-radio ">
+                                                            <input type="radio" id="customRadioInline2" name="choice" class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadioInline2">Politicien</label>
+                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
+                                                        </div>
+                                                        <div class="custom-control custom-radio ">
+                                                            <input type="radio" id="customRadioInline3" name="choice" class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadioInline3">Representant de l'environement</label>
+                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
+                                                        </div>
+                                                        <div class="custom-control custom-radio ">
+                                                            <input type="radio" id="customRadioInline4" name="choice" class="custom-control-input">
+                                                            <label class="custom-control-label" for="customRadioInline4">Representant de publique</label>
+                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
+                                                        </div>
+                                                        <hr>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 </form>

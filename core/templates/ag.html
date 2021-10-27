@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                         </div>
-                        {% if solution.all %}
+                        {% if solution %}
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
@@ -72,7 +72,14 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                {{ solution }}
+                                            {% if id_zone|length > 1 %}
+                                                les meilleures Zones Sont : <br>
+                                                {% for idzone in id_zone %}
+                                                    {{ idzone }}  <br> 
+                                                {% endfor %}
+                                            {% else %}
+                                                la meilleure Zone est : {{ id_zone }} 
+                                            {% endif %}
                                             </div>
                                         </div>
                                     </div>

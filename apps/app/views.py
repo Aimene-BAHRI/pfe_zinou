@@ -74,7 +74,7 @@ def apriori(request):
 import numpy
 @login_required(login_url="/login/")
 def ag(request):
-    context = {'segment': 'ag'}
+    
     html_template = loader.get_template('ag.html')
     result = None
     if request.method == 'POST':
@@ -155,12 +155,32 @@ def ag(request):
         # Then return the index of that solution corresponding to the best fitness.
         best_match_idx = numpy.where(fitness == numpy.min(fitness))
 
-        print("Best solution : ", new_population[best_match_idx, :])
-        result = new_population[best_match_idx, :]
-        print("Best solution fitness : ", fitness[best_match_idx])
-        context['solution'] = result
-        return HttpResponse(html_template.render(context, request))
+        result = []
+        for sublist in new_population[best_match_idx, :]:
+            for item in sublist:
+                for it in item:
+                    print(it)
+                    result.append(it)
+        
+        print("Best solution : ", result)
+        condi1 = data.iloc[:, 1] == result[0]
+        condi2 = data.iloc[:, 2] == result[1]
+        condi3 = data.iloc[:, 3] == result[2]
+        condi4 = data.iloc[:, 4] == result[3]
+        condi5 = data.iloc[:, 5] == result[4]
+        condi6 = data.iloc[:, 6] == result[5]
+        
 
+        id_zone = data.loc[(condi1)&(condi2)&(condi3)&(condi4)]
+        print('id_zone: ', id_zone.iloc[:, 0])
+
+        context = {'segment': 'ag',
+                    'solution' : result,
+                    'id_zone' : id_zone.iloc[:, 0]
+        }
+        print("Best solution fitness : ", fitness[best_match_idx])
+        return HttpResponse(html_template.render(context, request))
+    context = {'segment': 'ag'}
     return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")

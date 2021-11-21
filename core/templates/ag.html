@@ -22,40 +22,23 @@
                                     <h5>Algorithme Génétique</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h5>1 : Importer votre données</h5>
-                                    <hr>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <form method="POST" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 <div class="form-group">
-                                                    {% comment %} <label for="exampleInputFile">Pick your data file</label> {% endcomment %}
-                                                    <input name="docfile" type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp" />                                                    </div>        
-                                                    <hr>
-                                                        <h5>2 : choisir le poid de decision </h5>
+                                                        <h5>1 : Les decideurs </h5>
+                                                        {% if count %}
+                                                            Nombre de decideurs qui remplisent deja leurs parametres subjectifs : {{ count }} <br>
+                                                            {% for decideur in decideurs %}
+                                                                    Nom : {{ decideur }} <br>   
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            aucun décideur ne remplit ses paramètres subjectifs
+                                                        {% endif %}
                                                         
-                                                        <div class="custom-control custom-radio">
-                                                            <input type="radio" id="customRadioInline1" name="choice" class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadioInline1">Economiste</label>
-                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
-                                                        </div>
-                                                        <div class="custom-control custom-radio ">
-                                                            <input type="radio" id="customRadioInline2" name="choice" class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadioInline2">Politicien</label>
-                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
-                                                        </div>
-                                                        <div class="custom-control custom-radio ">
-                                                            <input type="radio" id="customRadioInline3" name="choice" class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadioInline3">Representant de l'environement</label>
-                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
-                                                        </div>
-                                                        <div class="custom-control custom-radio ">
-                                                            <input type="radio" id="customRadioInline4" name="choice" class="custom-control-input">
-                                                            <label class="custom-control-label" for="customRadioInline4">Representant de publique</label>
-                                                            </tr><span>{<strong>maximisation</strong> : ACCESSIBILITE/ <strong>Minimisation</strong> : BRUIT}</span>
-                                                        </div>
                                                         <hr>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="submit" class="btn btn-primary">Obtenir les meilleures Zones</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -63,29 +46,32 @@
                                 </div>
                             </div>
                         </div>
-                        {% if solution %}
-                            <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5>solution</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                            {% if id_zone|length > 1 %}
-                                                les meilleures Zones Sont : <br>
-                                                {% for idzone in id_zone %}
-                                                    {{ idzone }}  <br> 
-                                                {% endfor %}
-                                            {% else %}
-                                                la meilleure Zone est : {{ id_zone }} 
-                                            {% endif %}
+                        {% for decideur in final_result %}
+                            {% if solution %}
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>solution</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">    
+                                                    {% if id_zone|length > 1 %}
+                                                    
+                                                        les meilleures Zones parraport au <strong>{{ decideur.0 }}</strong> sont: <br>
+                                                        {% for idzone in decideur.1 %}
+                                                            {{ idzone }}  <br> 
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        la meilleure Zone parraport au {{ decideur.0 }} est : {{ decideur.1 }} 
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        {% endfor %}
                     </div>
                     <!-- [ Main Content ] end -->
                 </div>

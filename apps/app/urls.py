@@ -10,6 +10,7 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
+    path('profile', views.profile, name='profile'),
     path('promethee', views.promethee, name='promethee'),
     path('apriori', views.apriori, name='apriori'),
     path('genetic_algorithm', views.ag, name='genetic_a'),

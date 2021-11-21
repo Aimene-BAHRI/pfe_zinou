@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Dashboard {% endblock %} 
+{% block title %} Profile {% endblock %} 
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -15,11 +15,11 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">PROMETHEE II</h5>
+                                <h5 class="m-b-10">Profile </h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="javascript:">PROMETHEE II</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Profile</a></li>
                             </ul>
                         </div>
                     </div>
@@ -35,35 +35,30 @@
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5>Promethee II</h5>
+                                        <h5>Infos Personnelle</h5>
                                     </div>
                                     <div class="card-body">
                                         
                                         <div class="row">
                                             <div class="col-md-12">
-                                                {% if count %}
-                                                    Nombre de decideurs qui remplisent deja leurs parametres subjectifs : {{ count }} <br>
-                                                    {% for decideur in decideurs %}
-                                                            Nom : {{ decideur }} <br>   
-                                                    {% endfor %}
-                                                {% else %}
-                                                    aucun décideur ne remplit ses paramètres subjectifs
-                                                {% endif %}
-                                                
+                                                Utilisateur : {{ request.user }} <br>
+                                                Email : {% if user.email %}
+                                                        {{ user.email }}
+                                                    {% else %}
+                                                        Non specifier
+                                                    {% endif %} 
+												<br>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <form method='POST'>
-                                                    {% csrf_token %}
-                                                    <input type="submit" value = "Calculer">
-                                                </form>
-
-                                                {% if final_sort %}
-                                                    {{ final_sort }}
-                                                {% endif %}
-                                            </div>
+                                            <hr>
+											<div class="col-md-12">
+												Les Parametres Subjectifs : <br>
+												<form method='POST' class="form-inline">
+												{% csrf_token %}
+                                                    <input type='hidden' name='username' value="{{ request.user}} ">
+													{{ form }}
+													<button type="submit" class="btn btn-primary mb-2">sauvegarder</button>
+												</form>
+                                        	</div>
                                         </div>
                                     </div>
                                 </div>

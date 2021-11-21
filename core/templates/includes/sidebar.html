@@ -21,6 +21,11 @@
                         <a href="{% url 'home' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Accueil</span></a>
                     </li>
                     <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" 
+                        class="nav-item {% if 'profile' in segment %} active {% endif %}">
+                        <a href="{% url 'profile' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Profile</span></a>
+                    </li>
+                    {% if user.is_superuser %}
+                    <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" 
                         class="nav-item {% if 'promethee' in segment %} active {% endif %}">
                         <a href="{% url 'promethee' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Promethe II</span></a>
                     </li>
@@ -32,7 +37,11 @@
                         class="nav-item {% if 'ag' in segment %} active {% endif %}">
                         <a href="{% url 'genetic_a' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Algorithme Génétique</span></a>
                     </li>
-                    
+                    {% endif %}
+                    <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" 
+                        class="nav-item {% if 'logout' in segment %} active {% endif %}">
+                        <a href="{% url 'logout' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-x-circle"></i></span><span class="pcoded-mtext">Deconnexion</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
